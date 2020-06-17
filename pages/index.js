@@ -43,7 +43,7 @@ const Home = () => {
   return (
     <div id="app">
       <Head>
-        <title>Nitip Link</title>
+        <title>Nitip Link gan</title>
       </Head>
 
       <div id="main">
