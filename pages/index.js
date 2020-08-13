@@ -57,7 +57,7 @@ const Home = ({ images }) => {
     <>
       <Navbar />
       <Head>
-        <title>Nitip Link gan</title>
+        <title>Text - Nitip Link</title>
       </Head>
       <div id="app">
 

@@ -42,7 +42,7 @@ const Images = ({ images }) => {
     <>
       <Navbar />
       <Head>
-        <title>Nitip Link gan</title>
+        <title>Images - Nitip Link</title>
       </Head>
       <div id="app">
 

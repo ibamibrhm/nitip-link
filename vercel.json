@@ -7,7 +7,9 @@
       "FIREBASE_PROJECT_ID": "@firebase-project-id",
       "FIREBASE_STORAGE_BUCKET": "@firebase-storage-bucket",
       "FIREBASE_MESSAGING_SENDER_ID": "@firebase-messaging-sender-id",
-      "FIREBASE_APP_ID": "@firebase-app-id"
+      "FIREBASE_APP_ID": "@firebase-app-id",
+      "CLOUDINARY_API_KEY": "@cloudinary-api-key",
+      "CLOUDINARY_API_SECRET": "@cloudinary-api-secret"
     }
   },
   "env": {
@@ -17,6 +19,8 @@
     "FIREBASE_PROJECT_ID": "@firebase-project-id",
     "FIREBASE_STORAGE_BUCKET": "@firebase-storage-bucket",
     "FIREBASE_MESSAGING_SENDER_ID": "@firebase-messaging-sender-id",
-    "FIREBASE_APP_ID": "@firebase-app-id"
+    "FIREBASE_APP_ID": "@firebase-app-id",
+    "CLOUDINARY_API_KEY": "@cloudinary-api-key",
+    "CLOUDINARY_API_SECRET": "@cloudinary-api-secret"
   }
 }
