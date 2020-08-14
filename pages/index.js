@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link'
 import firebase from '../firebase';
+import Navbar from '../components/Navbar';
 
 const firestore = firebase.firestore();
 
-const Navbar = () => {
-  return (
-    <nav>
-      <ul>
-        <li><Link href="/"><a>Text</a></Link></li>
-        <li><Link href="/images"><a>Images</a></Link></li>
-      </ul>
-    </nav>
-
-  )
-}
-
-const Home = ({ images }) => {
+const Home = () => {
   const [links, setLinks] = useState([]);
   const [input, setInput] = useState('');
 

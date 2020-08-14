@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link'
-
-const Navbar = () => {
-  return (
-    <nav>
-      <ul>
-        <li><Link href="/"><a>Text</a></Link></li>
-        <li><Link href="/images"><a>Images</a></Link></li>
-      </ul>
-    </nav>
-
-  )
-}
+import Navbar from '../components/Navbar';
 
 const Images = ({ images }) => {
   const [list, setList] = useState([])
@@ -31,7 +19,7 @@ const Images = ({ images }) => {
       })
 
       const resData = await res.json()
-      alert('berhasil upload')
+      alert('berhasil upload foto')
       setList(prev => [resData, ...prev])
     } catch (error) {
       console.log('error: ', error)
@@ -45,7 +33,6 @@ const Images = ({ images }) => {
         <title>Images - Nitip Link</title>
       </Head>
       <div id="app">
-
         <div id="main">
           {list.map((image) => (
             <div key={image.asset_id}>
