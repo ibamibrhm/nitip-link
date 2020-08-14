@@ -8,16 +8,20 @@ const firestore = firebase.firestore();
 const Home = () => {
   const [links, setLinks] = useState([]);
   const [input, setInput] = useState('');
+  const [lastVisible, setLastVisible] = useState({})
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useEffect(() => fetchData(), []);
 
-  const fetchData = () => {
+  const fetchData = (start) => {
     firestore
       .collection('links')
       .orderBy('createdAt', 'desc')
-      .onSnapshot((querySnapshot) => {
+      .startAfter(start || lastVisible)
+      .limit(3)
+      .get().then((querySnapshot) => {
+        let lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+        setLastVisible(lastVisible);
+
         const res = querySnapshot.docs.map((snap) => {
           const data = snap.data();
           return {
@@ -25,7 +29,8 @@ const Home = () => {
             createdAt: data.createdAt.toDate()
           };
         });
-        setLinks(res);
+
+        setLinks(prev => res.concat(prev));
       });
   };
 
@@ -38,7 +43,12 @@ const Home = () => {
     firestore.collection('links').add({
       link: input,
       createdAt: new Date()
-    });
+    }).then(() => {
+      fetchData()
+      setInput('')
+      setLastVisible({})
+      alert('berhasil menambahkan data')
+    })
   };
 
   return (
@@ -48,7 +58,6 @@ const Home = () => {
         <title>Text - Nitip Link</title>
       </Head>
       <div id="app">
-
         <div id="main">
           {links.map((data) => (
             <div key={data.createdAt.toString()}>
@@ -62,12 +71,15 @@ const Home = () => {
           ))}
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
-          <button type="submit">Submit</button>
-        </form>
-
+        <div id="input-nav">
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+            <button type="submit">Submit</button>
+          </form>
+          <button onClick={() => fetchData(lastVisible)}>load more</button>
+        </div>
       </div>
+
       <style jsx>{`
         #app {
           display: flex;
@@ -83,7 +95,7 @@ const Home = () => {
           margin-right: 20px;
         }
 
-        form {
+        #input-nav, form {
           margin-bottom: 20px;
         }
 
