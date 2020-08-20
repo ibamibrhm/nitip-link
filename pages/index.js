@@ -10,13 +10,13 @@ const Home = () => {
   const [input, setInput] = useState('');
   const [lastVisible, setLastVisible] = useState({})
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => fetchData({}), []);
 
   const fetchData = (start) => {
     firestore
       .collection('links')
       .orderBy('createdAt', 'desc')
-      .startAfter(start || lastVisible)
+      .startAfter(start)
       .limit(3)
       .get().then((querySnapshot) => {
         let lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -44,10 +44,11 @@ const Home = () => {
       link: input,
       createdAt: new Date()
     }).then(() => {
-      fetchData()
       setInput('')
       setLastVisible({})
+      setLinks([])
       alert('berhasil menambahkan data')
+      fetchData({})
     })
   };
 
