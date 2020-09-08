@@ -17,7 +17,7 @@ const Home = () => {
       .collection('links')
       .orderBy('createdAt', 'desc')
       .startAfter(start)
-      .limit(3)
+      .limit(5)
       .get().then((querySnapshot) => {
         let lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
         setLastVisible(lastVisible);
