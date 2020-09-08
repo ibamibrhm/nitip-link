@@ -7,7 +7,6 @@ const Images = ({ images }) => {
 
   const handleImage = async (e) => {
     try {
-      console.log('uploading...')
       const file = e.target.files[0]
       const data = new FormData()
       data.append('file', file)
